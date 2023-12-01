@@ -1,3 +1,5 @@
+use aoc_runner_derive::aoc;
+
 #[aoc(dayX, part1)]
 fn part1(input: &str) -> usize {
     todo!()

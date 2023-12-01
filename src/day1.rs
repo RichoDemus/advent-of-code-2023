@@ -1,3 +1,4 @@
+use aoc_runner_derive::aoc;
 use phf::phf_map;
 
 #[aoc(day1, part1)]
