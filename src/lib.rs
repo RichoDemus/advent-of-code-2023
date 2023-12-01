@@ -1,5 +1,3 @@
-#![allow(clippy::must_use_candidate)]
-
 use aoc_runner_derive::aoc_lib;
 
 mod day1;
