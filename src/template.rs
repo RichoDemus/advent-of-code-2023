@@ -1,3 +1,5 @@
+use aoc_runner_derive::aoc;
+
 #[aoc(dayX, part1)]
 fn part1(input: &str) -> usize {
     todo!()
@@ -14,18 +16,21 @@ mod tests {
 
 // #[test]
     // fn verify_part1() {
-    //     let input = include_str!("../input/2022/dayX.txt");
+    //     let input = include_str!("../input/2024/dayX.txt");
     //     assert_eq!(part1(input), 0);
     // }
 
     // #[test]
     // fn verify_part2() {
-    //     let input = include_str!("../input/2022/dayX.txt");
+    //     let input = include_str!("../input/2024/dayX.txt");
     //     assert_eq!(part2(input), 0);
     // }
 
     #[test]
     fn part1_provided_example() {
+        let _ = env_logger::builder()
+            .filter_module("advent_of_code_2024", log::LevelFilter::Info)
+            .try_init();
         let result = part1(
             r#""#,
         );
@@ -35,6 +40,9 @@ mod tests {
 
     // #[test]
     // fn part2_provided_example() {
+    // let _ = env_logger::builder()
+    // .filter_module("advent_of_code_2024", log::LevelFilter::Info)
+    // .try_init();
     //     let result = part2(
     //         r#""#,
     //     );

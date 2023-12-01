@@ -1,11 +1,11 @@
 [package]
-name = "advent-of-code-2023"
+name = "advent-of-code-2024"
 version = "0.1.0"
 edition = "2021"
 description = "Doing advent of code in rust"
 readme = "README.md"
 license-file = "LICENSE"
-repository = "https://github.com/RichoDemus/advent-of-code-2023"
+repository = "https://github.com/RichoDemus/advent-of-code-2024"
 keywords = ["aoc","advent-of-code"]
 categories = ["games"]
 
@@ -14,14 +14,19 @@ categories = ["games"]
 [dependencies]
 aoc-runner = "0.3.0"
 aoc-runner-derive = "0.3.0"
-#itertools = "0.10.1"
+env_logger = "0.11"
+log = "0.4.20"
+itertools = "0.13"
+parse-display = "0.10"
+#anyhow = "1.0.75"
 #regex = "1.5.4"
 #colored = "2.0.0"
 #num-bigint = "0.4.3"
 #num-traits = "0.2.15"
 #strum = { version = "0.23", features = ["derive"] }
 #split-iter = "0.1.0"
-once_cell = "1.8.0"
+#once_cell = "1.19"
+#phf = { version = "0.11.2" , features = ["macros"]}
 #pathfinding = "3.0.5"
 #pathfinding = "4.1.0"
 #ouroboros = "0.14.0"

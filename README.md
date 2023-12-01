@@ -1,4 +1,4 @@
-# Advent of code 2023
+# Advent of code 2024
 ## on new day
 1. Download new input
 ```
