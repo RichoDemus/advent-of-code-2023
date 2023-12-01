@@ -89,6 +89,23 @@ fn str_end_to_digit(word: &str) -> Option<usize> {
     None
 }
 
+#[aoc(day1, part2, oneloop)]
+fn part2_oneloop(input: &str) -> usize {
+    input
+        .lines()
+        .map(|mut line| {
+            let mut digits = vec![];
+            while !line.is_empty() {
+                if let Some(digit) = str_start_to_digit(line) {
+                    digits.push(digit);
+                }
+                line = &line[1..];
+            }
+            10 * digits.first().unwrap() + digits.last().unwrap()
+        })
+        .sum()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -101,8 +118,8 @@ mod tests {
 
     #[test]
     fn verify_part2() {
-        let input = include_str!("../input/2023/day1.txt");
-        assert_eq!(part2(input), 55291);
+        assert_eq!(part2(include_str!("../input/2023/day1.txt")), 55291);
+        assert_eq!(part2_oneloop(include_str!("../input/2023/day1.txt")), 55291);
     }
 
     #[test]
@@ -119,16 +136,29 @@ treb7uchet"#,
 
     #[test]
     fn part2_provided_example() {
-        let result = part2(
-            r#"two1nine
+        assert_eq!(
+            part2(
+                r#"two1nine
 eightwothree
 abcone2threexyz
 xtwone3four
 4nineeightseven2
 zoneight234
 7pqrstsixteen"#,
+            ),
+            281
         );
-
-        assert_eq!(result, 281)
+        assert_eq!(
+            part2_oneloop(
+                r#"two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen"#,
+            ),
+            281
+        );
     }
 }
