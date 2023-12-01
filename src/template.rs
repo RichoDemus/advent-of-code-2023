@@ -14,13 +14,13 @@ mod tests {
 
 // #[test]
     // fn verify_part1() {
-    //     let input = include_str!("../input/2022/dayX.txt");
+    //     let input = include_str!("../input/2023/dayX.txt");
     //     assert_eq!(part1(input), 0);
     // }
 
     // #[test]
     // fn verify_part2() {
-    //     let input = include_str!("../input/2022/dayX.txt");
+    //     let input = include_str!("../input/2023/dayX.txt");
     //     assert_eq!(part2(input), 0);
     // }
 
