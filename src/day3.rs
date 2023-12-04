@@ -68,6 +68,7 @@ impl Display for Cell {
     }
 }
 
+#[allow(clippy::too_many_lines)]
 #[aoc(day3, part2)]
 fn part2(input: &str) -> usize {
     let board = parse(input);
@@ -102,22 +103,6 @@ fn part2(input: &str) -> usize {
             }
         }
     }
-
-    // //print board
-    // for y in 0..board.len() {
-    //     for x in 0..board[y].len() {
-    //         print!("{}", board[y][x]);
-    //     }
-    //     println!();
-    // }
-    // println!(" new board:");
-    // //print new board
-    // for  row in new_board.iter() {
-    //     for  cell in row.iter() {
-    //         print!("{cell}")
-    //     }
-    //     println!()
-    // }
 
     let mut result = 0;
 
