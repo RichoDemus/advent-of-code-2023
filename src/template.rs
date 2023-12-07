@@ -28,6 +28,9 @@ mod tests {
 
     #[test]
     fn part1_provided_example() {
+        let _ = env_logger::builder()
+            .filter_module("advent_of_code_2023", log::LevelFilter::Info)
+            .try_init();
         let result = part1(
             r#""#,
         );
@@ -37,6 +40,9 @@ mod tests {
 
     // #[test]
     // fn part2_provided_example() {
+    // let _ = env_logger::builder()
+    // .filter_module("advent_of_code_2023", log::LevelFilter::Info)
+    // .try_init();
     //     let result = part2(
     //         r#""#,
     //     );
