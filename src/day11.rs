@@ -1,9 +1,9 @@
-use std::collections::HashSet;
-use std::fmt::{Display, Formatter};
+use crate::day11::Cell::{Empty, Space, Star};
 use aoc_runner_derive::aoc;
 use itertools::Itertools;
 use log::info;
-use crate::day11::Cell::{Empty, Space, Star};
+use std::collections::HashSet;
+use std::fmt::{Display, Formatter};
 
 #[allow(clippy::cast_possible_wrap)]
 #[aoc(day11, part1)]
@@ -130,10 +130,14 @@ fn part2(input: &str) -> i128 {
     solve_part2(input, 1_000_000)
 }
 
-fn solve_part2(input:&str, size: i128) -> i128 {
+fn solve_part2(input: &str, size: i128) -> i128 {
     let mut picture = input
         .lines()
-        .map(|line| line.chars().map(|c| if c == '#'{Star} else {Empty}).collect_vec())
+        .map(|line| {
+            line.chars()
+                .map(|c| if c == '#' { Star } else { Empty })
+                .collect_vec()
+        })
         .collect_vec();
     print_arr2(&picture);
 
@@ -167,9 +171,11 @@ fn solve_part2(input:&str, size: i128) -> i128 {
             // this column has no stars, extend it
             for row in 0..picture.len() {
                 if let Space(i) = picture[row][col_index].clone() {
-                    *picture.get_mut(row).unwrap().get_mut(col_index).unwrap() = Space(vec![i[0], space_index]);
+                    *picture.get_mut(row).unwrap().get_mut(col_index).unwrap() =
+                        Space(vec![i[0], space_index]);
                 } else {
-                    *picture.get_mut(row).unwrap().get_mut(col_index).unwrap() = Space(vec![space_index]);
+                    *picture.get_mut(row).unwrap().get_mut(col_index).unwrap() =
+                        Space(vec![space_index]);
                 }
             }
             space_index += 1;
@@ -187,7 +193,7 @@ fn solve_part2(input:&str, size: i128) -> i128 {
             row.into_iter()
                 .enumerate()
                 .filter_map(|(col_index, star)| {
-                    if star ==Star {
+                    if star == Star {
                         Some((row_index, col_index))
                     } else {
                         None
@@ -204,7 +210,9 @@ fn solve_part2(input:&str, size: i128) -> i128 {
             let (r1, c1) = stars[0];
             let (r2, c2) = stars[1];
 
-            let distance = calc_distance(&picture, r1 as i128,c1 as i128,r2 as i128,c2 as i128, size);
+            let distance = calc_distance(
+                &picture, r1 as i128, c1 as i128, r2 as i128, c2 as i128, size,
+            );
             info!("Distance between {r1} {c1} and {r2} {c2}: {distance}");
             distance
         })
@@ -212,7 +220,7 @@ fn solve_part2(input:&str, size: i128) -> i128 {
 }
 
 #[allow(clippy::cast_sign_loss)]
-fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, size:  i128) -> i128 {
+fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, size: i128) -> i128 {
     // if r1 != 6 || c1 != 1 || r2 != 11 || c2 != 5 {
     //     return 1
     // }
@@ -221,7 +229,7 @@ fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, si
     // let horizontal_steps = c1.max(c2) - c1.min(c2);
     // info!("\t {vertical_steps} vertical steps and {horizontal_steps} hortizontal steps");
 
-    let mut steps:Vec<Cell> = vec![];
+    let mut steps: Vec<Cell> = vec![];
     let mut col = c1.min(c2);
     let mut row = r1.min(r2);
     let row_end = r1.max(r2);
@@ -233,7 +241,7 @@ fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, si
             steps.push(space[row as usize][col as usize].clone());
 
             if row == row_end {
-                break
+                break;
             }
             row += 1;
         }
@@ -247,7 +255,7 @@ fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, si
             // info!("\t\tstepping over {row} {col}: {}", space[row as usize][col as usize]);
             steps.push(space[row as usize][col as usize].clone());
             if col == col_end {
-                break
+                break;
             }
             col += 1;
         }
@@ -258,7 +266,7 @@ fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, si
     let mut visited_spaces = HashSet::new();
     for step in steps {
         match step {
-            Star|Empty => {
+            Star | Empty => {
                 result += 1;
             }
             Space(id_vec) => {
@@ -269,7 +277,7 @@ fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, si
                 } else {
                     let id1 = id_vec[0];
                     let id2 = id_vec[1];
-                    if visited_spaces.contains(&id1) && visited_spaces.contains(&id2){
+                    if visited_spaces.contains(&id1) && visited_spaces.contains(&id2) {
                         //noop
                     } else if visited_spaces.contains(&id1) {
                         visited_spaces.insert(id1);
@@ -290,15 +298,17 @@ fn calc_distance(space: &[Vec<Cell>], r1: i128, c1: i128, r2: i128, c2: i128, si
 
 #[derive(Clone, Eq, PartialEq, Debug)]
 enum Cell {
-    Star,Space(Vec<usize>),Empty,
+    Star,
+    Space(Vec<usize>),
+    Empty,
 }
 
 impl Display for Cell {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Star => write!(f,"#"),
-            Space(s) => write!(f,"{}", s.first().unwrap()),
-            Empty => write!(f,"."),
+            Star => write!(f, "#"),
+            Space(s) => write!(f, "{}", s.first().unwrap()),
+            Empty => write!(f, "."),
         }
     }
 }
